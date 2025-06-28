@@ -18,7 +18,7 @@ async function main() {
     abi: JSON.parse(medicalReportSystem.interface.formatJson()),
   }
 
-  fs.writeFileSync("./client/src/contracts/MedicalReportSystem.json", JSON.stringify(contractData, null, 2))
+  fs.writeFileSync("../client/src/contracts/MedicalReportSystem.json", JSON.stringify(contractData, null, 2))
   console.log("Contract data saved to client/src/contracts/MedicalReportSystem.json")
 }
 

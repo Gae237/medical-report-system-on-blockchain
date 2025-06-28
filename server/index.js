@@ -3,6 +3,7 @@ const cors = require("cors")
 const multer = require("multer")
 const pinataSDK = require("@pinata/sdk")
 const mongoose = require("mongoose")
+const streamifier = require("streamifier");
 require("dotenv").config()
 
 const app = express()
@@ -70,7 +71,9 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
       },
     }
 
-    const result = await pinata.pinFileToIPFS(req.file.buffer, options)
+    const readableStream = streamifier.createReadStream(req.file.buffer);
+
+    const result = await pinata.pinFileToIPFS(readableStream, options);
 
     res.json({
       success: true,
